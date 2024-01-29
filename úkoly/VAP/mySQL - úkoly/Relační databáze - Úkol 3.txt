@@ -1,0 +1,32 @@
+CREATE TABLE Zaci (
+    rodne_cislo INT PRIMARY KEY,
+    jmeno VARCHAR(50),
+    prijmeni VARCHAR(50),
+    trida VARCHAR(10),
+    FOREIGN KEY (trida) REFERENCES Tridy(nazev_tridy)
+);
+
+CREATE TABLE Ucitele (
+    rodne_cislo INT PRIMARY KEY,
+    jmeno VARCHAR(50),
+    prijmeni VARCHAR(50),
+    kvalifikace VARCHAR(100)
+);
+
+CREATE TABLE Tridy (
+    nazev_tridy VARCHAR(10) PRIMARY KEY,
+    tridni_ucitel INT,
+    mistnost VARCHAR(50),
+    FOREIGN KEY (tridni_ucitel) REFERENCES Ucitele(rodne_cislo)
+);
+
+INSERT INTO Zaci (rodne_cislo, jmeno, prijmeni, trida) VALUES (123456789, 'Jan', 'Novák', '1.A');
+
+INSERT INTO Ucitele (rodne_cislo, jmeno, prijmeni, kvalifikace) VALUES (987654321, 'Petr', 'Svoboda', 'Magistr v oboru pedagogika');
+
+INSERT INTO Tridy (nazev_tridy, tridni_ucitel, mistnost) VALUES ('1.A', 987654321, 'A1');
+
+SELECT Z.jmeno, Z.prijmeni, Z.trida, U.jmeno AS jmeno_ucitele, U.prijmeni AS prijmeni_ucitele
+FROM Zaci Z
+JOIN Tridy T ON Z.trida = T.nazev_tridy
+JOIN Ucitele U ON T.tridni_ucitel = U.rodne_cislo;

@@ -1,0 +1,24 @@
+CREATE TABLE zaci (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    jmeno VARCHAR(20),
+    prijmeni VARCHAR(20),
+    trida VARCHAR(3)
+);
+
+INSERT INTO zaci (jmeno, prijmeni, trida) VALUES
+('Jan', 'Novák', '1.A'),
+('Petr', 'Svoboda', '1.A'),
+('Marie', 'Kovářová', '1.A'),
+('Jana', 'Černá', '1.B'),
+('Tomáš', 'Horák', '1.B'),
+('Kateřina', 'Veselá', '1.B'),
+('David', 'Procházka', '1.C'),
+('Eva', 'Malá', '1.C'),
+('Martin', 'Růžička', '1.C');
+
+SELECT * FROM zaci;
+
+SELECT id, jmeno FROM zaci WHERE trida = '1.A';
+
+-- Načtení jmen a tříd všech žáků s identifikátorem vyšším než 6
+SELECT jmeno, trida FROM zaci WHERE id > 6;
